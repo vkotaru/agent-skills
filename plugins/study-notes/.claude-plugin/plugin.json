@@ -1,0 +1,19 @@
+{
+  "name": "study-notes",
+  "description": "Build interactive learning websites: textbook-style chapters with intuition before maths, equations linked to React widgets, hand-checkable worked numbers, checkpoint quizzes, and a code companion tested against the page.",
+  "version": "0.1.0",
+  "author": {
+    "name": "vkotaru",
+    "url": "https://github.com/vkotaru"
+  },
+  "homepage": "https://github.com/vkotaru/claude-skills",
+  "keywords": [
+    "learning",
+    "textbook",
+    "interactive",
+    "katex",
+    "react",
+    "jax",
+    "teaching"
+  ]
+}
