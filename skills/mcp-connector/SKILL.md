@@ -1,6 +1,6 @@
 ---
 name: mcp-connector
-description: Expose a self-hosted, private web app to Claude as a custom remote MCP connector — the separate internet-facing service, OAuth 2.1, the read-only tool layer, Tailscale Funnel, and the isolation that keeps a compromised connector away from the app. Use when the user wants Claude/Cowork to read data from an app they host themselves, asks about custom connectors, remote MCP servers, MCP OAuth, or exposing a tailnet-only service to the internet safely. Also use when auditing an existing MCP connector against this design.
+description: Expose a self-hosted, private web app to a cloud-hosted AI assistant (Claude, or any remote MCP client) as a custom remote MCP connector — the separate internet-facing service, OAuth 2.1, the read-only tool layer, Tailscale Funnel, and the isolation that keeps a compromised connector away from the app. Use when the user wants Claude/Cowork or another hosted assistant to read data from an app they host themselves, asks about custom connectors, remote MCP servers, MCP OAuth, or exposing a tailnet-only service to the internet safely. Also use when auditing an existing MCP connector against this design.
 ---
 
 # Self-hosted MCP connector
@@ -22,6 +22,11 @@ picks one option and says why.
 not from the user's device**. A local/stdio server will not work; a tailnet-only
 HTTPS endpoint will not work. It must be publicly reachable over HTTPS.
 
+> **Other clients.** The worked example targets Claude's custom connectors, but
+> the design holds for any MCP client that connects from the vendor's cloud.
+> Only the client-specific details change — chiefly the OAuth redirect URIs and
+> metadata requirements in §5. Check your client's documentation for those.
+
 ## 0. Before you start
 
 ### When this applies
@@ -34,7 +39,7 @@ HTTPS endpoint will not work. It must be publicly reachable over HTTPS.
 
 - **If the app is already public with real auth**, you do not need most of this —
   add an MCP endpoint behind your existing auth and skip to §5 and §9.
-- **If you only want Claude Code (local) to reach it**, use a stdio server on the
+- **If you only want a local agent (Claude Code, Codex CLI, …) to reach it**, use a stdio server on the
   machine. None of the exposure work below is needed.
 
 ### Decide these three first
